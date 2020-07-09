@@ -22,3 +22,7 @@ export { default as StyleguidePage } from './StyleguidePage/StyleguidePage';
 export { default as TermsOfServicePage } from './TermsOfServicePage/TermsOfServicePage';
 export { default as TopbarContainer } from './TopbarContainer/TopbarContainer';
 export { default as TransactionPage } from './TransactionPage/TransactionPage';
+
+/* Application Pages */
+export { default as ServicesPage } from './ServicesPage/';
+export { default as VideoPage } from './VideoPage/';

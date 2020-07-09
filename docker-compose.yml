@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  
+  ftw-hourly:
+    container_name: ftw-hourly
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # volumes:
+    #   - ./src:/var/www/app/src:Z
+    #   - ./public:/var/www/app/public:Z
+    environment:
+      - ENV=development
+    stdin_open: true
+    ports:
+      - 3000:3000

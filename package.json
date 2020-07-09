@@ -4,6 +4,10 @@
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
+    "faker": "^4.1.0",
+    "twilio": "^3.11.1",
+    "twilio-video":"^2.6.0",
+    "axios": "^0.18.1",
     "@formatjs/intl-relativetimeformat": "^4.2.1",
     "@mapbox/polyline": "^1.0.0",
     "@sentry/browser": "5.7.1",
@@ -61,6 +65,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "sharetribe-flex-integration-sdk": "^1.1.0",
     "babel-jest": "24.9.0",
     "bfj": "^7.0.2",
     "chalk": "^2.4.1",

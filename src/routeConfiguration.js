@@ -22,6 +22,8 @@ import {
   StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
+  ServicesPage,
+  VideoPage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -52,6 +54,17 @@ const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
 // See behaviour from Routes.js where Route is created.
 const routeConfiguration = () => {
   return [
+    // Application Pages
+    {
+      path: '/services',
+      name: 'ServicesPage',
+      component: props => <ServicesPage />,
+    },
+    {
+      path: '/video',
+      name: 'VideoPage',
+      component: props => <VideoPage />,
+    },
     {
       path: '/',
       name: 'LandingPage',
