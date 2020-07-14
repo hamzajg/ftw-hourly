@@ -1,18 +1,18 @@
-require("dotenv").config();
 import faker from "faker";
 import twilio from "twilio";
 
-export default function token() {
+export default function getToken() {
     var identity = faker.name.findName();
 
     var AccessToken = twilio.jwt.AccessToken;
     var VideoGrant = AccessToken.VideoGrant;
     // Create an access token which we will sign and return to the client,
     // containing the grant we just created
+    console.log(process.env)
     var token = new AccessToken(
-        process.env.TWILIO_ACCOUNT_SID,
-        process.env.TWILIO_API_KEY_SID,
-        process.env.TWILIO_API_KEY_SECRET
+        process.env.REACT_APP_TWILIO_ACCOUNT_SID,
+        process.env.REACT_APP_TWILIO_API_KEY_SID,
+        process.env.REACT_APP_TWILIO_API_KEY_SECRET
     );
 
     // Assign the generated identity to the token

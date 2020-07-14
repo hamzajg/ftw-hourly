@@ -156,11 +156,20 @@ const TopbarDesktop = props => {
       />
     ) : null;
 
-  const createListingLink =
+    const createListingLink =
     isAuthenticatedOrJustHydrated && !(currentUserListingFetched && !currentUserListing) ? null : (
       <NamedLink className={css.createListingLink} name="NewListingPage">
         <span className={css.createListing}>
           <FormattedMessage id="TopbarDesktop.createListing" />
+        </span>
+      </NamedLink>
+    );
+    
+    const createConsultingLink =
+    isAuthenticatedOrJustHydrated && !(currentUserListingFetched && !currentUserListing) ? null : (
+      <NamedLink className={css.createListingLink} name="NewConsultingPage">
+        <span className={css.createListing}>
+          <FormattedMessage id="TopbarDesktop.createConsulting" />
         </span>
       </NamedLink>
     );
@@ -176,7 +185,8 @@ const TopbarDesktop = props => {
       </NamedLink>
       {search}
       {listingLink}
-      {createListingLink}
+      {/* {createListingLink} */}
+      {createConsultingLink}
       {inboxLink}
       {profileMenu}
       {signupLink}

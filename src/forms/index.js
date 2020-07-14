@@ -25,3 +25,13 @@ export { default as SignupForm } from './SignupForm/SignupForm';
 export { default as StripePaymentForm } from './StripePaymentForm/StripePaymentForm';
 export { default as StripeConnectAccountForm } from './StripeConnectAccountForm/StripeConnectAccountForm';
 export { default as TopbarSearchForm } from './TopbarSearchForm/TopbarSearchForm';
+//
+
+export { default as EditConsultingAvailabilityExceptionForm } from './EditConsultingAvailabilityExceptionForm/';
+export { default as EditConsultingAvailabilityPlanForm } from './EditConsultingAvailabilityPlanForm/';
+export { default as EditConsultingDescriptionForm } from './EditConsultingDescriptionForm/';
+export { default as EditConsultingFeaturesForm } from './EditConsultingFeaturesForm/';
+export { default as EditConsultingScheduleForm } from './EditConsultingScheduleForm/';
+export { default as EditConsultingPhotosForm } from './EditConsultingPhotosForm/';
+export { default as EditConsultingPoliciesForm } from './EditConsultingPoliciesForm/';
+export { default as EditConsultingPricingForm } from './EditConsultingPricingForm/';

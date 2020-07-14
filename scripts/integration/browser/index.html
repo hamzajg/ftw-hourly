@@ -63,6 +63,12 @@
         <input type="submit">
       </p>
     </form>
+    <p>Node scripts</p>
+    <p>node scripts/integration/full-marketplace.js</p>
+    <p>node scripts/integration/marketplace.js</p>
+    <p>node scripts/integration/twilio-video.js</p>
+    <p>Docker-compose up -d --build</p>
+
   </template>
 
   <template class="status">
@@ -111,10 +117,12 @@
         <p>token: <span class="twilio-token"></span></p>
     </div>
   </template>
-  <script src="./sharetribe-flex-sdk-web.js"></script>
-  <script src="./index.js"></script>
-  <script src="//media.twiliocdn.com/sdk/js/video/releases/2.6.0/twilio-video.min.js"></script>
+  <script src="./sharetribe-flex-sdk-web.js"></script> 
+   <script src="https://sdk.twilio.com/js/client/releases/1.12.1/twilio.min.js"></script>
+   <script src="//media.twiliocdn.com/sdk/js/video/releases/2.3.0/twilio-video.min.js"></script>
+   
 
+  <script src="./index.js"></script>
 </body>
 
 </html>

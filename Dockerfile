@@ -14,6 +14,7 @@ FROM dependencies as final
 COPY . /var/www/app
 # Expose port
 EXPOSE 3000
+EXPOSE 3500
 # Run app
 RUN yarn build
 RUN cp .env.development .env

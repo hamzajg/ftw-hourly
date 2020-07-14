@@ -22,8 +22,10 @@ import {
   StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
+  HomeLandingPage,
   ServicesPage,
   VideoPage,
+  EditConsultingPage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -42,7 +44,7 @@ export const ACCOUNT_SETTINGS_PAGES = [
 const draftId = '00000000-0000-0000-0000-000000000000';
 const draftSlug = 'draft';
 
-const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
+const RedirectToLandingPage = () => <NamedRedirect name="HomeLandingPage" />;
 
 // NOTE: Most server-side endpoints are prefixed with /api. Requests to those
 // endpoints are indended to be handled in the server instead of the browser and
@@ -64,6 +66,29 @@ const routeConfiguration = () => {
       path: '/video',
       name: 'VideoPage',
       component: props => <VideoPage />,
+    },
+    {
+      path: '/home',
+      name: 'HomeLandingPage',
+      component: props => <HomeLandingPage {...props} />,
+    },
+    {
+      path: '/c/new',
+      name: 'NewConsultingPage',
+      auth: true,
+      component: () => (
+        <NamedRedirect
+          name="EditConsultingPage"
+          params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description' }}
+        />
+      ),
+    },
+    {
+      path: '/c/:slug/:id/:type/:tab',
+      name: 'EditConsultingPage',
+      auth: true,
+      component: props => <EditConsultingPage {...props} allowOnlyOneListing />,
+      loadData: EditConsultingPage.loadData,
     },
     {
       path: '/',
@@ -124,6 +149,13 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <ListingPage {...props} />,
       loadData: ListingPage.loadData,
+    },
+    {
+      path: '/c/:slug/:id/:type/:tab/:returnURLType',
+      name: 'EditConsultingStripeOnboardingPage',
+      auth: true,
+      component: props => <EditConsultingPage {...props} />,
+      loadData: EditConsultingPage.loadData,
     },
     {
       path: '/l/new',

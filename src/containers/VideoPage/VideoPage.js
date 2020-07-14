@@ -10,14 +10,14 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-  ExternalLink,
 } from '../../components';
 
 import css from './VideoPage.css';
-import image from './video-1056.jpg';
+import './VideoPage.css';
+//import getToken from "./TwilioApi";
 
 export default class VideoPage extends Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       identity: null,
@@ -30,10 +30,10 @@ export default class VideoPage extends Component {
     };
     this.joinRoom = this.joinRoom.bind(this);
     this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
-    this.roomJoined = this.roomJoined.bind(this);
+    this.roomJoined2 = this.roomJoined2.bind(this);
     this.leaveRoom = this.leaveRoom.bind(this);
-    this.detachTracks = this.detachTracks.bind(this);
-    this.detachParticipantTracks = this.detachParticipantTracks.bind(this);
+    //this.detachTracks = this.detachTracks.bind(this);
+    //this.detachParticipantTracks = this.detachParticipantTracks.bind(this);
   }
 
   handleRoomNameChange(e) {
@@ -58,37 +58,12 @@ export default class VideoPage extends Component {
 
     // Join the Room with the token from the server and the
     // LocalParticipant's Tracks.
-    Video.connect(this.state.token, connectOptions).then(this.roomJoined, error => {
+    Video.connect(this.state.token, connectOptions).then(this.roomJoined2, error => {
       alert('Could not connect to Twilio: ' + error.message);
     });
   }
 
-  attachTracks(tracks, container) {
-    tracks.forEach(track => {
-      container.appendChild(track.attach());
-    });
-  }
-
-  // Attaches a track to a specified DOM container
-  attachParticipantTracks(participant, container) {
-    var tracks = Array.from(participant.tracks.values());
-    this.attachTracks(tracks, container);
-  }
-
-  detachTracks(tracks) {
-    tracks.forEach(track => {
-      track.detach().forEach(detachedElement => {
-        detachedElement.remove();
-      });
-    });
-  }
-
-  detachParticipantTracks(participant) {
-    var tracks = Array.from(participant.tracks.values());
-    this.detachTracks(tracks);
-  }
-
-  roomJoined(room) {
+  roomJoined2(room) {
     // Called when a participant joins a room
     console.log("Joined as '" + this.state.identity + "'");
     this.setState({
@@ -96,65 +71,55 @@ export default class VideoPage extends Component {
       localMediaAvailable: true,
       hasJoinedRoom: true
     });
+    // Log your Client's LocalParticipant in the Room
+    const localParticipant = room.localParticipant;
+    console.log(`Connected to the Room as LocalParticipant "${localParticipant.identity}"`);
 
-    // Attach LocalParticipant's Tracks, if not already attached.
-    var previewContainer = this.refs.localMedia;
-    if (!previewContainer.querySelector('video')) {
-      this.attachParticipantTracks(room.localParticipant, previewContainer);
-    }
-
-    // Attach the Tracks of the Room's Participants.
+    // Log any Participants already connected to the Room
     room.participants.forEach(participant => {
-      console.log("Already in Room: '" + participant.identity + "'");
-      var previewContainer = this.refs.remoteMedia;
-      this.attachParticipantTracks(participant, previewContainer);
+      console.log(`Participant "${participant.identity}" is connected to the Room`);
     });
 
-    // When a Participant joins the Room, log the event.
+    // Log new Participants as they connect to the Room
+    room.once('participantConnected', participant => {
+      console.log(`Participant "${participant.identity}" has connected to the Room`);
+    });
+
+    // Log Participants as they disconnect from the Room
+    room.once('participantDisconnected', participant => {
+      console.log(`Participant "${participant.identity}" has disconnected from the Room`);
+    });
     room.on('participantConnected', participant => {
-      console.log("Joining: '" + participant.identity + "'");
+      console.log(`Participant connected: ${participant.identity}`);
     });
-
-    // When a Participant adds a Track, attach it to the DOM.
-    room.on('trackAdded', (track, participant) => {
-      console.log(participant.identity + ' added track: ' + track.kind);
-      var previewContainer = this.refs.remoteMedia;
-      this.attachTracks([track], previewContainer);
-    });
-
-    // When a Participant removes a Track, detach it from the DOM.
-    room.on('trackRemoved', (track, participant) => {
-      console.log(participant.identity + ' removed track: ' + track.kind);
-      this.detachTracks([track]);
-    });
-
-    // When a Participant leaves the Room, detach its Tracks.
+    
     room.on('participantDisconnected', participant => {
-      console.log("Participant '" + participant.identity + "' left the room");
-      this.detachParticipantTracks(participant);
+      console.log(`Participant disconnected: ${participant.identity}`);
     });
+    var localPreviewContainer = this.refs.localMedia;
+    var remotePreviewContainer = this.refs.remoteMedia;
 
-    // Once the LocalParticipant leaves the room, detach the Tracks
-    // of all Participants, including that of the LocalParticipant.
-    room.on('disconnected', () => {
-      if (this.state.previewTracks) {
-        this.state.previewTracks.forEach(track => {
-          track.stop();
-        });
-      }
-      this.detachParticipantTracks(room.localParticipant);
-      room.participants.forEach(this.detachParticipantTracks);
-      this.state.activeRoom = null;
-      this.setState({ hasJoinedRoom: false, localMediaAvailable: false });
+    room.once('participantConnected', participant => {
+      console.log(`Participant "${participant.identity}" connected`);
+    
+      participant.tracks.forEach(publication => {
+        if (publication.isSubscribed) {
+          const track = publication.track;
+          remotePreviewContainer.appendChild(track.attach());
+        }
+      });
+    
+      participant.on('trackSubscribed', track => {
+        remotePreviewContainer.appendChild(track.attach());
+      });
     });
   }
-
+  
   componentDidMount() {
-    axios.get('api/token').then(results => {
+    axios.get('http://localhost:3500/api/token').then(results => {
       const { identity, token } = results.data;
       this.setState({ identity, token });
     });
-    //getToken();
   }
 
   leaveRoom() {
@@ -173,12 +138,11 @@ export default class VideoPage extends Component {
       );
     // Hide 'Join Room' button if user has already joined a room.
     let joinOrLeaveRoomButton = this.state.hasJoinedRoom ? (
-      <button label="Leave Room" secondary={true} onClick={this.leaveRoom} />
+      <button label="Leave Room" onClick={this.leaveRoom} >Leave Room</button>
     ) : (
-        <button label="Join Room" primary={true} onClick={this.joinRoom} />
+        <button label="Join Room" onClick={this.joinRoom} >Join Room</button>
       );
-    const { siteTwitterHandle, siteFacebookPage } = config;
-    const siteTwitterPage = twitterPageURL(siteTwitterHandle);
+    const { siteTwitterHandle } = config;
 
     // prettier-ignore
     return (
@@ -200,15 +164,14 @@ export default class VideoPage extends Component {
           <div className="flex-container">
                 {showLocalTrack}
                 <div className="flex-item">
-                  {/* <span
-                    hintText="Room Name"
+                  <input
+                    placeholder="Room Name"
                     onChange={this.handleRoomNameChange}
-                    errorText={this.state.roomNameErr ? 'Room Name is required' : undefined}
-                  /> */}
+                  />
                   <br />
                   {joinOrLeaveRoomButton}
                 </div>
-                <div className="flex-item" ref="remoteMedia" id="remote-media" />
+                <div className={css.video} ref="remoteMedia" id="remote-media" />
               </div>
           </LayoutWrapperMain>
 

@@ -178,3 +178,12 @@ export { default as Topbar } from './Topbar/Topbar';
 export { default as TopbarDesktop } from './TopbarDesktop/TopbarDesktop';
 export { default as TopbarMobileMenu } from './TopbarMobileMenu/TopbarMobileMenu';
 export { default as TransactionPanel } from './TransactionPanel/TransactionPanel';
+//
+export { default as EditConsultingAvailabilityPanel } from './EditConsultingAvailabilityPanel/';
+export { default as EditConsultingDescriptionPanel } from './EditConsultingDescriptionPanel/';
+export { default as EditConsultingFeaturesPanel } from './EditConsultingFeaturesPanel/';
+export { default as EditConsultingSchedulePanel } from './EditConsultingSchedulePanel/';
+export { default as EditConsultingPhotosPanel } from './EditConsultingPhotosPanel/';
+export { default as EditConsultingPoliciesPanel } from './EditConsultingPoliciesPanel/';
+export { default as EditConsultingPricingPanel } from './EditConsultingPricingPanel/';
+export { default as EditConsultingWizard } from './EditConsultingWizard/';

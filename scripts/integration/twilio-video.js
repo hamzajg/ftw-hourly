@@ -9,9 +9,9 @@ var VideoGrant = AccessToken.VideoGrant;
         // Create an access token which we will sign and return to the client,
         // containing the grant we just created
         var token = new AccessToken(
-            process.env.TWILIO_ACCOUNT_SID,
-            process.env.TWILIO_API_KEY_SID,
-            process.env.TWILIO_API_KEY_SECRET
+            process.env.REACT_APP_TWILIO_ACCOUNT_SID,
+            process.env.REACT_APP_TWILIO_API_KEY_SID,
+            process.env.REACT_APP_TWILIO_API_KEY_SECRET
         );
     
         // Assign the generated identity to the token

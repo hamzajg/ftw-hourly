@@ -7,11 +7,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # volumes:
-    #   - ./src:/var/www/app/src:Z
-    #   - ./public:/var/www/app/public:Z
+    volumes:
+      - ./src:/var/www/app/src:Z
+      - ./public:/var/www/app/public:Z
     environment:
       - ENV=development
     stdin_open: true
     ports:
       - 3000:3000
+      - 3500:3500

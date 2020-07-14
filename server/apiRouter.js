@@ -15,6 +15,7 @@ const loginAs = require('./api/login-as');
 const transactionLineItems = require('./api/transaction-line-items');
 const initiatePrivileged = require('./api/initiate-privileged');
 const transitionPrivileged = require('./api/transition-privileged');
+const twilio = require('./api/twilio');
 
 const router = express.Router();
 
@@ -50,4 +51,7 @@ router.post('/transaction-line-items', transactionLineItems);
 router.post('/initiate-privileged', initiatePrivileged);
 router.post('/transition-privileged', transitionPrivileged);
 
+// twilio token
+
+router.get('/token', twilio);
 module.exports = router;
