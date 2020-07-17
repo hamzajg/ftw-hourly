@@ -127,6 +127,22 @@ const TopbarDesktop = props => {
     </Menu>
   ) : null;
 
+  const momLink = (isAuthenticatedOrJustHydrated || currentPage == "MomPage" )? null : (
+    <NamedLink name="MomPage" className={css.signupLink}>
+      <span className={css.signup}>
+        <FormattedMessage id="TopbarDesktop.mom" />
+      </span>
+    </NamedLink>
+  );
+  
+  const consultantLink = (isAuthenticatedOrJustHydrated || currentPage == "ConsultantPage") ? null : (
+    <NamedLink name="ConsultantPage" className={css.signupLink}>
+      <span className={css.signup}>
+        <FormattedMessage id="TopbarDesktop.consultant" />
+      </span>
+    </NamedLink>
+  );
+
   const signupLink = isAuthenticatedOrJustHydrated ? null : (
     <NamedLink name="SignupPage" className={css.signupLink}>
       <span className={css.signup}>
@@ -173,10 +189,9 @@ const TopbarDesktop = props => {
         </span>
       </NamedLink>
     );
-
   return (
     <nav className={classes}>
-      <NamedLink className={css.logoLink} name="LandingPage">
+      <NamedLink className={css.logoLink} name="HomeLandingPage">
         <Logo
           format="desktop"
           className={css.logo}
@@ -186,11 +201,13 @@ const TopbarDesktop = props => {
       {search}
       {listingLink}
       {/* {createListingLink} */}
-      {createConsultingLink}
+      {/* {createConsultingLink} */}
+      {!window.location.href.includes("/consultant") && !window.location.href.includes("/mom") && momLink}
+      {!window.location.href.includes("/mom") && !window.location.href.includes("/consultant") && consultantLink}
       {inboxLink}
       {profileMenu}
-      {signupLink}
-      {loginLink}
+      {(window.location.href.includes("/consultant") || window.location.href.includes("/mom")) && signupLink}
+      {(window.location.href.includes("/consultant") || window.location.href.includes("/mom")) && loginLink}
     </nav>
   );
 };

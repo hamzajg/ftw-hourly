@@ -26,6 +26,8 @@ import {
   ServicesPage,
   VideoPage,
   EditConsultingPage,
+  MomPage,
+  ConsultantPage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -57,6 +59,15 @@ const RedirectToLandingPage = () => <NamedRedirect name="HomeLandingPage" />;
 const routeConfiguration = () => {
   return [
     // Application Pages
+    {
+      path: '/mom',
+      name: 'MomPage',
+      component: props => <MomPage />,
+    },{
+      path: '/consultant',
+      name: 'ConsultantPage',
+      component: props => <ConsultantPage />,
+    },
     {
       path: '/services',
       name: 'ServicesPage',

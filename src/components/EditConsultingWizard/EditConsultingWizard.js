@@ -23,7 +23,7 @@ import EditConsultingWizardTab, {
   DESCRIPTION,
   FEATURES,
   POLICY,
-  LOCATION,
+  SCHEDULE,
   PRICING,
   PHOTOS,
 } from './EditConsultingWizardTab';
@@ -42,7 +42,7 @@ export const TABS = [
   DESCRIPTION,
   FEATURES,
   //POLICY,
-  LOCATION,
+  SCHEDULE,
   PRICING,
   ...availabilityMaybe,
   PHOTOS,
@@ -62,7 +62,7 @@ const tabLabel = (intl, tab) => {
     key = 'EditConsultingWizard.tabLabelFeatures';
   } else if (tab === POLICY) {
     key = 'EditConsultingWizard.tabLabelPolicy';
-  } else if (tab === LOCATION) {
+  } else if (tab === SCHEDULE) {
     key = 'EditConsultingWizard.tabLabelLocation';
   } else if (tab === PRICING) {
     key = 'EditConsultingWizard.tabLabelPricing';
@@ -101,7 +101,7 @@ const tabCompleted = (tab, listing) => {
       return !!(publicData && publicData.yogaStyles);
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined');
-    case LOCATION:
+    case SCHEDULE:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
       return !!price;
@@ -181,10 +181,10 @@ const handleGetStripeConnectAccountLinkFn = (getLinkFn, commonParams) => type =>
 
 const RedirectToStripe = ({ redirectFn }) => {
   useEffect(redirectFn('custom_account_verification'), []);
-  return <FormattedMessage id="EditListingWizard.redirectingToStripe" />;
+  return <FormattedMessage id="EditConsultingWizard.redirectingToStripe" />;
 };
 
-// Create a new or edit listing through EditListingWizard
+// Create a new or edit listing through EditConsultingWizard
 class EditConsultingWizard extends Component {
   constructor(props) {
     super(props);
@@ -416,7 +416,7 @@ class EditConsultingWizard extends Component {
             <h1 className={css.modalTitle}>
               <FormattedMessage id="EditConsultingWizard.payoutModalTitleOneMoreThing" />
               <br />
-              <FormattedMessage id="EditCosnultingWizard.payoutModalTitlePayoutPreferences" />
+              <FormattedMessage id="EditConsultingWizard.payoutModalTitlePayoutPreferences" />
             </h1>
             {!currentUserLoaded ? (
               <FormattedMessage id="StripePayoutPage.loadingData" />

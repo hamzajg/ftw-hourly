@@ -24,6 +24,8 @@ export { default as TopbarContainer } from './TopbarContainer/TopbarContainer';
 export { default as TransactionPage } from './TransactionPage/TransactionPage';
 
 /* Application Pages */
+export { default as MomPage } from './MomPage/';
+export { default as ConsultantPage } from './ConsultantPage/';
 export { default as HomeLandingPage } from './HomeLandingPage/';
 export { default as ServicesPage } from './ServicesPage/';
 export { default as VideoPage } from './VideoPage/';

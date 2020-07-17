@@ -179,6 +179,8 @@ export { default as TopbarDesktop } from './TopbarDesktop/TopbarDesktop';
 export { default as TopbarMobileMenu } from './TopbarMobileMenu/TopbarMobileMenu';
 export { default as TransactionPanel } from './TransactionPanel/TransactionPanel';
 //
+
+export { default as SectionServices } from './SectionServices/';
 export { default as EditConsultingAvailabilityPanel } from './EditConsultingAvailabilityPanel/';
 export { default as EditConsultingDescriptionPanel } from './EditConsultingDescriptionPanel/';
 export { default as EditConsultingFeaturesPanel } from './EditConsultingFeaturesPanel/';

@@ -26,7 +26,7 @@ export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
 export const FEATURES = 'features';
 export const POLICY = 'policy';
-export const LOCATION = 'location';
+export const SCHEDULE = 'schedule';
 export const PRICING = 'pricing';
 export const PHOTOS = 'photos';
 
@@ -35,7 +35,7 @@ export const SUPPORTED_TABS = [
   DESCRIPTION,
   FEATURES,
   POLICY,
-  LOCATION,
+  SCHEDULE,
   PRICING,
   AVAILABILITY,
   PHOTOS,
@@ -209,13 +209,13 @@ const EditConsultingWizardTab = props => {
         />
       );
     }
-    case LOCATION: {
+    case SCHEDULE: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditConsultingWizard.saveNewLocation'
         : 'EditConsultingWizard.saveEditLocation';
       return (
         <EditConsultingSchedulePanel
-          {...panelProps(LOCATION)}
+          {...panelProps(SCHEDULE)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);

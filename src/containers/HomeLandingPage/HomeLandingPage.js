@@ -17,6 +17,7 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
+  SectionServices,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
@@ -72,7 +73,7 @@ export const HomeLandingPageComponent = props => {
           <ul className={css.sections}>
             <li className={css.section}>
               <div className={css.sectionContentFirstChild}>
-                <SectionLocations />
+                <SectionServices />
               </div>
             </li>
             <li className={css.section}>

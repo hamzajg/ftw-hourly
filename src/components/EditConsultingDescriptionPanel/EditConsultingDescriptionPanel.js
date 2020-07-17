@@ -6,7 +6,7 @@ import { ensureOwnListing } from '../../util/data';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '../../components';
-import { EditListingDescriptionForm } from '../../forms';
+import { EditConsultingDescriptionForm } from '../../forms';
 import config from '../../config';
 
 import css from './EditConsultingDescriptionPanel.css';
@@ -50,7 +50,7 @@ const EditConsultingDescriptionPanel = props => {
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDescriptionForm
+      <EditConsultingDescriptionForm
         className={css.form}
         initialValues={{ title, description, certificate: publicData.certificate }}
         saveActionMsg={submitButtonText}
