@@ -27,6 +27,10 @@ import {
   VideoPage,
   EditConsultingPage,
   MomPage,
+  ProblemsPage,
+  SurveyPage,
+  CategoriesPage,
+  ConsultantsPage,
   ConsultantPage,
 } from './containers';
 
@@ -63,7 +67,28 @@ const routeConfiguration = () => {
       path: '/mom',
       name: 'MomPage',
       component: props => <MomPage />,
-    },{
+    },
+    {
+      path: '/mom/problems',
+      name: 'ProblemsPage',
+      component: props => <ProblemsPage />,
+    },
+    {
+      path: '/mom/survey',
+      name: 'SurveyPage',
+      component: props => <SurveyPage />,
+    },
+    {
+      path: '/mom/categories',
+      name: 'CategoriesPage',
+      component: props => <CategoriesPage />,
+    },
+    {
+      path: '/consultants',
+      name: 'ConsultantsPage',
+      component: props => <ConsultantsPage />,
+    },
+    {
       path: '/consultant',
       name: 'ConsultantPage',
       component: props => <ConsultantPage />,
@@ -153,14 +178,14 @@ const routeConfiguration = () => {
       component: props => <CheckoutPage {...props} />,
       setInitialValues: CheckoutPage.setInitialValues,
     },
-    {
-      path: '/l/:slug/:id/:variant',
-      name: 'ListingPageVariant',
-      auth: true,
-      authPage: 'LoginPage',
-      component: props => <ListingPage {...props} />,
-      loadData: ListingPage.loadData,
-    },
+    // {
+    //   path: '/l/:slug/:id/:variant',
+    //   name: 'ListingPageVariant',
+    //   auth: true,
+    //   authPage: 'LoginPage',
+    //   component: props => <ListingPage {...props} />,
+    //   loadData: ListingPage.loadData,
+    // },
     {
       path: '/c/:slug/:id/:type/:tab/:returnURLType',
       name: 'EditConsultingStripeOnboardingPage',

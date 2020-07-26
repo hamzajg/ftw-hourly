@@ -25,6 +25,10 @@ export { default as TransactionPage } from './TransactionPage/TransactionPage';
 
 /* Application Pages */
 export { default as MomPage } from './MomPage/';
+export { default as ProblemsPage } from './ProblemsPage/';
+export { default as SurveyPage } from './SurveyPage/';
+export { default as CategoriesPage } from './CategoriesPage/';
+export { default as ConsultantsPage } from './ConsultantsPage/';
 export { default as ConsultantPage } from './ConsultantPage/';
 export { default as HomeLandingPage } from './HomeLandingPage/';
 export { default as ServicesPage } from './ServicesPage/';

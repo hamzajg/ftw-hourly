@@ -17,15 +17,15 @@ import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck
 import { SearchMap, ModalInMobile, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
-import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
+import { searchListings, searchMapListings, setActiveListing } from './ConsultantsPage.duck';
 import {
   pickSearchParamsOnly,
   validURLParamsForExtendedData,
   validFilterParams,
   createSearchResultSchema,
-} from './SearchPage.helpers';
+} from './ConsultantsPage.helpers';
 import MainPanel from './MainPanel';
-import css from './SearchPage.css';
+import css from './ConsultantsPage.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
 // Current design has max 3 columns 12 is divisible by 2 and 3
@@ -34,7 +34,7 @@ const RESULT_PAGE_SIZE = 24;
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
 
-export class SearchPageComponent extends Component {
+export class ConsultantsPageComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -56,7 +56,7 @@ export class SearchPageComponent extends Component {
     const { viewportBounds, viewportCenter } = data;
 
     const routes = routeConfiguration();
-    const searchPagePath = pathByRouteName('SearchPage', routes);
+    const searchPagePath = pathByRouteName('ConsultantsPage', routes);
     const currentPath =
       typeof window !== 'undefined' && window.location && window.location.pathname;
 
@@ -87,7 +87,7 @@ export class SearchPageComponent extends Component {
         ...validFilterParams(rest, filterConfig),
       };
 
-      history.push(createResourceLocatorString('SearchPage', routes, {}, searchParams));
+      history.push(createResourceLocatorString('ConsultantsPage', routes, {}, searchParams));
     }
   }
 
@@ -199,6 +199,7 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             onManageDisableScrolling={onManageDisableScrolling}
           >
+            
           </ModalInMobile>
         </div>
       </Page>
@@ -207,7 +208,7 @@ export class SearchPageComponent extends Component {
   }
 }
 
-SearchPageComponent.defaultProps = {
+ConsultantsPageComponent.defaultProps = {
   listings: [],
   mapListings: [],
   pagination: null,
@@ -219,7 +220,7 @@ SearchPageComponent.defaultProps = {
   activeListingId: null,
 };
 
-SearchPageComponent.propTypes = {
+ConsultantsPageComponent.propTypes = {
   listings: array,
   mapListings: array,
   onActivateListing: func.isRequired,
@@ -287,16 +288,16 @@ const mapDispatchToProps = dispatch => ({
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-const SearchPage = compose(
+const ConsultantsPage = compose(
   withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
   injectIntl
-)(SearchPageComponent);
+)(ConsultantsPageComponent);
 
-SearchPage.loadData = (params, search) => {
+ConsultantsPage.loadData = (params, search) => {
   const queryParams = parse(search, {
     latlng: ['origin'],
     latlngBounds: ['bounds'],
@@ -316,4 +317,4 @@ SearchPage.loadData = (params, search) => {
   });
 };
 
-export default SearchPage;
+export default ConsultantsPage;

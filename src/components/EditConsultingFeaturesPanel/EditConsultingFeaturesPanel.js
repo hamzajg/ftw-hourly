@@ -5,12 +5,12 @@ import { FormattedMessage } from '../../util/reactIntl';
 
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ensureListing } from '../../util/data';
-import { EditListingFeaturesForm } from '../../forms';
+import { EditConsultingFeaturesForm } from '../../forms';
 import { ListingLink } from '../../components';
 
 import css from './EditConsultingFeaturesPanel.css';
 
-const FEATURES_NAME = 'yogaStyles';
+const FEATURES_NAME = 'services';
 
 const EditConsultingFeaturesPanel = props => {
   const {
@@ -53,7 +53,7 @@ const EditConsultingFeaturesPanel = props => {
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingFeaturesForm
+      <EditConsultingFeaturesForm
         className={css.form}
         name={FEATURES_NAME}
         initialValues={initialValues}
