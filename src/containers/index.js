@@ -33,4 +33,5 @@ export { default as ConsultantPage } from './ConsultantPage/';
 export { default as HomeLandingPage } from './HomeLandingPage/';
 export { default as ServicesPage } from './ServicesPage/';
 export { default as VideoPage } from './VideoPage/';
-export { default as EditConsultingPage } from './EditConsultingPage/';
+export { default as NewConsultantPage } from './NewConsultantPage';
+export { default as EditConsultingPage } from './EditConsultantPage';

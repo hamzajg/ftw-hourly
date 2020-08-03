@@ -259,7 +259,7 @@ export class NewConsultantPageComponent extends Component {
     );
 
     const bookingTitle = (
-      <FormattedMessage id="NewConsultantPage.bookingTitle" values={{ title: richTitle }} />
+      <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
     );
 
     const topbar = <TopbarContainer />;
@@ -272,7 +272,7 @@ export class NewConsultantPageComponent extends Component {
       // Other error in fetching listing
 
       const errorTitle = intl.formatMessage({
-        id: 'NewConsultantPage.errorLoadingListingTitle',
+        id: 'ListingPage.errorLoadingListingTitle',
       });
 
       return (
@@ -281,7 +281,7 @@ export class NewConsultantPageComponent extends Component {
             <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
             <LayoutWrapperMain>
               <p className={css.errorText}>
-                <FormattedMessage id="NewConsultantPage.errorLoadingListingMessage" />
+                <FormattedMessage id="ListingPage.errorLoadingListingMessage" />
               </p>
             </LayoutWrapperMain>
             <LayoutWrapperFooter>
@@ -294,7 +294,7 @@ export class NewConsultantPageComponent extends Component {
       // Still loading the listing
 
       const loadingTitle = intl.formatMessage({
-        id: 'NewConsultantPage.loadingListingTitle',
+        id: 'ListingPage.loadingListingTitle',
       });
 
       return (
@@ -303,7 +303,7 @@ export class NewConsultantPageComponent extends Component {
             <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
             <LayoutWrapperMain>
               <p className={css.loadingText}>
-                <FormattedMessage id="NewConsultantPage.loadingListingMessage" />
+                <FormattedMessage id="ListingPage.loadingListingMessage" />
               </p>
             </LayoutWrapperMain>
             <LayoutWrapperFooter>
@@ -367,7 +367,7 @@ export class NewConsultantPageComponent extends Component {
     const schemaImages = JSON.stringify(facebookImages.map(img => img.url));
     const siteTitle = config.siteTitle;
     const schemaTitle = intl.formatMessage(
-      { id: 'NewConsultantPage.schemaTitle' },
+      { id: 'ListingPage.schemaTitle' },
       { title, price: formattedPrice, siteTitle }
     );
 
@@ -462,7 +462,7 @@ export class NewConsultantPageComponent extends Component {
               </div>
             </div>
             <Modal
-              id="NewConsultantPage.enquiry"
+              id="ListingPage.enquiry"
               contentClassName={css.enquiryModalContent}
               isOpen={isAuthenticated && this.state.enquiryModalOpen}
               onClose={() => this.setState({ enquiryModalOpen: false })}

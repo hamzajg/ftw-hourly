@@ -18,9 +18,9 @@ import {
   EditConsultingPhotosPanel,
   EditConsultingPoliciesPanel,
   EditConsultingPricingPanel,
-} from '../../components';
+} from '..';
 
-import css from './EditConsultingWizard.css';
+import css from './EditConsultantWizard.css';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
@@ -72,7 +72,7 @@ const redirectAfterDraftUpdate = (listingId, params, tab, marketplaceTabs, histo
   history.push(to);
 };
 
-const EditConsultingWizardTab = props => {
+const EditConsultantWizardTab = props => {
   const {
     tab,
     marketplaceTabs,
@@ -169,8 +169,8 @@ const EditConsultingWizardTab = props => {
   switch (tab) {
     case DESCRIPTION: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditConsultingWizard.saveNewDescription'
-        : 'EditConsultingWizard.saveEditDescription';
+        ? 'EditConsultantWizard.saveNewDescription'
+        : 'EditConsultantWizard.saveEditDescription';
       return (
         <EditConsultingDescriptionPanel
           {...panelProps(DESCRIPTION)}
@@ -183,8 +183,8 @@ const EditConsultingWizardTab = props => {
     }
     case FEATURES: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditConsultingWizard.saveNewFeatures'
-        : 'EditConsultingWizard.saveEditFeatures';
+        ? 'EditConsultantWizard.saveNewFeatures'
+        : 'EditConsultantWizard.saveEditFeatures';
       return (
         <EditConsultingFeaturesPanel
           {...panelProps(FEATURES)}
@@ -197,8 +197,8 @@ const EditConsultingWizardTab = props => {
     }
     case POLICY: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditConsultingWizard.saveNewPolicies'
-        : 'EditConsultingWizard.saveEditPolicies';
+        ? 'EditConsultantWizard.saveNewPolicies'
+        : 'EditConsultantWizard.saveEditPolicies';
       return (
         <EditConsultingPoliciesPanel
           {...panelProps(POLICY)}
@@ -211,8 +211,8 @@ const EditConsultingWizardTab = props => {
     }
     case SCHEDULE: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditConsultingWizard.saveNewLocation'
-        : 'EditConsultingWizard.saveEditLocation';
+        ? 'EditConsultantWizard.saveNewLocation'
+        : 'EditConsultantWizard.saveEditLocation';
       return (
         <EditConsultingSchedulePanel
           {...panelProps(SCHEDULE)}
@@ -225,8 +225,8 @@ const EditConsultingWizardTab = props => {
     }
     case PRICING: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditConsultingWizard.saveNewPricing'
-        : 'EditConsultingWizard.saveEditPricing';
+        ? 'EditConsultantWizard.saveNewPricing'
+        : 'EditConsultantWizard.saveEditPricing';
       return (
         <EditConsultingPricingPanel
           {...panelProps(PRICING)}
@@ -239,8 +239,8 @@ const EditConsultingWizardTab = props => {
     }
     case AVAILABILITY: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditConsultingWizard.saveNewAvailability'
-        : 'EditConsultingWizard.saveEditAvailability';
+        ? 'EditConsultantWizard.saveNewAvailability'
+        : 'EditConsultantWizard.saveEditAvailability';
       return (
         <EditConsultingAvailabilityPanel
           {...panelProps(AVAILABILITY)}
@@ -262,8 +262,8 @@ const EditConsultingWizardTab = props => {
     }
     case PHOTOS: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditConsultingWizard.saveNewPhotos'
-        : 'EditConsultingWizard.saveEditPhotos';
+        ? 'EditConsultantWizard.saveNewPhotos'
+        : 'EditConsultantWizard.saveEditPhotos';
 
       return (
         <EditConsultingPhotosPanel
@@ -284,13 +284,13 @@ const EditConsultingWizardTab = props => {
   }
 };
 
-EditConsultingWizardTab.defaultProps = {
+EditConsultantWizardTab.defaultProps = {
   listing: null,
   updatedTab: null,
   availabilityExceptions: [],
 };
 
-EditConsultingWizardTab.propTypes = {
+EditConsultantWizardTab.propTypes = {
   params: shape({
     id: string.isRequired,
     slug: string.isRequired,
@@ -345,4 +345,4 @@ EditConsultingWizardTab.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default EditConsultingWizardTab;
+export default EditConsultantWizardTab;

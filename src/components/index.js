@@ -180,6 +180,7 @@ export { default as TopbarMobileMenu } from './TopbarMobileMenu/TopbarMobileMenu
 export { default as TransactionPanel } from './TransactionPanel/TransactionPanel';
 //
 
+export { default as ConsultantLink } from './ConsultantLink/';
 export { default as SectionServices } from './SectionServices/';
 export { default as EditConsultingAvailabilityPanel } from './EditConsultingAvailabilityPanel/';
 export { default as EditConsultingDescriptionPanel } from './EditConsultingDescriptionPanel/';
@@ -188,4 +189,4 @@ export { default as EditConsultingSchedulePanel } from './EditConsultingSchedule
 export { default as EditConsultingPhotosPanel } from './EditConsultingPhotosPanel/';
 export { default as EditConsultingPoliciesPanel } from './EditConsultingPoliciesPanel/';
 export { default as EditConsultingPricingPanel } from './EditConsultingPricingPanel/';
-export { default as EditConsultingWizard } from './EditConsultingWizard/';
+export { default as EditConsultantWizard } from './EditConsultantWizard';

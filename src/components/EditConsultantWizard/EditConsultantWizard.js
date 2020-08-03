@@ -15,10 +15,10 @@ import {
 } from '../../util/urlHelpers';
 import { ensureCurrentUser, ensureListing } from '../../util/data';
 
-import { Modal, NamedRedirect, Tabs, StripeConnectAccountStatusBox } from '../../components';
+import { Modal, NamedRedirect, Tabs, StripeConnectAccountStatusBox } from '..';
 import { StripeConnectAccountForm } from '../../forms';
 
-import EditConsultingWizardTab, {
+import EditConsultantWizardTab, {
   AVAILABILITY,
   DESCRIPTION,
   FEATURES,
@@ -26,8 +26,8 @@ import EditConsultingWizardTab, {
   SCHEDULE,
   PRICING,
   PHOTOS,
-} from './EditConsultingWizardTab';
-import css from './EditConsultingWizard.css';
+} from './EditConsultantWizardTab';
+import css from './EditConsultantWizard.css';
 
 // Show availability calendar only if environment variable availabilityEnabled is true
 const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
@@ -57,19 +57,19 @@ const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure';
 const tabLabel = (intl, tab) => {
   let key = null;
   if (tab === DESCRIPTION) {
-    key = 'EditConsultingWizard.tabLabelDescription';
+    key = 'EditConsultantWizard.tabLabelDescription';
   } else if (tab === FEATURES) {
-    key = 'EditConsultingWizard.tabLabelFeatures';
+    key = 'EditConsultantWizard.tabLabelFeatures';
   } else if (tab === POLICY) {
-    key = 'EditConsultingWizard.tabLabelPolicy';
+    key = 'EditConsultantWizard.tabLabelPolicy';
   } else if (tab === SCHEDULE) {
-    key = 'EditConsultingWizard.tabLabelLocation';
+    key = 'EditConsultantWizard.tabLabelLocation';
   } else if (tab === PRICING) {
-    key = 'EditConsultingWizard.tabLabelPricing';
+    key = 'EditConsultantWizard.tabLabelPricing';
   } else if (tab === AVAILABILITY) {
-    key = 'EditConsultingWizard.tabLabelAvailability';
+    key = 'EditConsultantWizard.tabLabelAvailability';
   } else if (tab === PHOTOS) {
-    key = 'EditConsultingWizard.tabLabelPhotos';
+    key = 'EditConsultantWizard.tabLabelPhotos';
   }
 
   return intl.formatMessage({ id: key });
@@ -181,11 +181,11 @@ const handleGetStripeConnectAccountLinkFn = (getLinkFn, commonParams) => type =>
 
 const RedirectToStripe = ({ redirectFn }) => {
   useEffect(redirectFn('custom_account_verification'), []);
-  return <FormattedMessage id="EditConsultingWizard.redirectingToStripe" />;
+  return <FormattedMessage id="EditConsultantWizard.redirectingToStripe" />;
 };
 
-// Create a new or edit listing through EditConsultingWizard
-class EditConsultingWizard extends Component {
+// Create a new or edit listing through EditConsultantWizard
+class EditConsultantWizard extends Component {
   constructor(props) {
     super(props);
 
@@ -246,7 +246,7 @@ class EditConsultingWizard extends Component {
     this.props
       .onPayoutDetailsSubmit(values)
       .then(response => {
-        this.props.onManageDisableScrolling('EditConsultingWizard.payoutModal', false);
+        this.props.onManageDisableScrolling('EditConsultantWizard.payoutModal', false);
       })
       .catch(() => {
         // do nothing
@@ -297,7 +297,7 @@ class EditConsultingWizard extends Component {
         .reverse()
         .find(t => tabsStatus[t]);
 
-      return <NamedRedirect name="EditConsultingPage" params={{ ...params, tab: nearestActiveTab }} />;
+      return <NamedRedirect name="EditConsultantPage" params={{ ...params, tab: nearestActiveTab }} />;
     }
 
     const { width } = viewport;
@@ -317,7 +317,7 @@ class EditConsultingWizard extends Component {
     }
 
     const tabLink = tab => {
-      return { name: 'EditConsultingPage', params: { ...params, tab } };
+      return { name: 'EditConsultantPage', params: { ...params, tab } };
     };
 
     const setPortalRootAfterInitialRender = () => {
@@ -371,7 +371,7 @@ class EditConsultingWizard extends Component {
 
     // Redirect from success URL to basic path for StripePayoutPage
     if (returnedNormallyFromStripe && stripeConnected && !requirementsMissing) {
-      return <NamedRedirect name="EditConsultingPage" params={pathParams} />;
+      return <NamedRedirect name="EditConsultantPage" params={pathParams} />;
     }
 
     return (
@@ -383,7 +383,7 @@ class EditConsultingWizard extends Component {
         >
           {TABS.map(tab => {
             return (
-              <EditConsultingWizardTab
+              <EditConsultantWizardTab
                 {...rest}
                 key={tab}
                 tabId={`${id}_${tab}`}
@@ -406,7 +406,7 @@ class EditConsultingWizard extends Component {
           })}
         </Tabs>
         <Modal
-          id="EditConsultingWizard.payoutModal"
+          id="EditConsultantWizard.payoutModal"
           isOpen={this.state.showPayoutDetails}
           onClose={this.handlePayoutModalClose}
           onManageDisableScrolling={onManageDisableScrolling}
@@ -414,9 +414,9 @@ class EditConsultingWizard extends Component {
         >
           <div className={css.modalPayoutDetailsWrapper}>
             <h1 className={css.modalTitle}>
-              <FormattedMessage id="EditConsultingWizard.payoutModalTitleOneMoreThing" />
+              <FormattedMessage id="EditConsultantWizard.payoutModalTitleOneMoreThing" />
               <br />
-              <FormattedMessage id="EditConsultingWizard.payoutModalTitlePayoutPreferences" />
+              <FormattedMessage id="EditConsultantWizard.payoutModalTitlePayoutPreferences" />
             </h1>
             {!currentUserLoaded ? (
               <FormattedMessage id="StripePayoutPage.loadingData" />
@@ -475,7 +475,7 @@ class EditConsultingWizard extends Component {
   }
 }
 
-EditConsultingWizard.defaultProps = {
+EditConsultantWizard.defaultProps = {
   className: null,
   currentUser: null,
   rootClassName: null,
@@ -490,7 +490,7 @@ EditConsultingWizard.defaultProps = {
   stripeAccountLinkError: null,
 };
 
-EditConsultingWizard.propTypes = {
+EditConsultantWizard.propTypes = {
   id: string.isRequired,
   className: string,
   currentUser: propTypes.currentUser,
@@ -550,4 +550,4 @@ EditConsultingWizard.propTypes = {
 export default compose(
   withViewport,
   injectIntl
-)(EditConsultingWizard);
+)(EditConsultantWizard);
