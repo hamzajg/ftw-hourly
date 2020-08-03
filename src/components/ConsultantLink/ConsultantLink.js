@@ -56,7 +56,7 @@ const ConsultantLink = props => {
         },
       }
     : {
-        name: 'ConsultantPage',
+        name: 'ConsultingPage',
         params: { id, slug },
       };
   return (

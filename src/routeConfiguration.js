@@ -32,7 +32,7 @@ import {
   CategoriesPage,
   ConsultantsPage,
   ConsultantPage,
-  NewConsultantPage,
+  ConsultingPage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -192,8 +192,8 @@ const routeConfiguration = () => {
       name: 'ConsultantPageVariant',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <NewConsultantPage {...props} />,
-      loadData: NewConsultantPage.loadData,
+      component: props => <ListingPage {...props} />,
+      loadData: ConsultingPage.loadData,
     },
     {
       path: '/c/:slug/:id/:type/:tab/:returnURLType',
