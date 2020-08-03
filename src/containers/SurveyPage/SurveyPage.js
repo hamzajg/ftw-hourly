@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
-import config from '../../config';
-import { twitterPageURL } from '../../util/urlHelpers';
-import { StaticPage, TopbarContainer } from '../../containers';
 import {
-  LayoutSingleColumn,
-  LayoutWrapperTopbar,
-  LayoutWrapperMain,
-  LayoutWrapperFooter,
-  Footer,
-  ExternalLink,
+  Footer, LayoutSingleColumn,
+  LayoutWrapperFooter, LayoutWrapperMain, LayoutWrapperTopbar,
   NamedLink,
 } from '../../components';
-
+import config from '../../config';
+import { StaticPage, TopbarContainer } from '../../containers';
+import { twitterPageURL } from '../../util/urlHelpers';
 import css from './SurveyPage.css';
-import image from './survey-1056.jpg';
+
 import { FormattedMessage } from '../../util/reactIntl';
 
 const SurveyPage = () => {
   const [result, setResult] = useState(undefined);
-  const [next, setNext] = useState(false);
+  const [next, setNext] = useState(undefined);
   const [age, setAge] = useState(undefined);
+  const [tmp, setTmp] = useState(undefined);
   const [reaniningMonths, setReaniningMonths] = useState(undefined);
   const [selectedService, setSelectedService] = useState(undefined);
   const { siteTwitterHandle, siteFacebookPage } = config;
@@ -28,78 +24,88 @@ const SurveyPage = () => {
   const Quiz = () => {
     return (
       <div>
-        <h2 className={css.subtitle}>Please answer the questions to help us providing usefull service.</h2>
 
-        <p>Q1: xxxxxxxxx</p>
+        <p>Is the baby born?</p>
       </div>
     );
   }
   const EndQuiz = () => {
-    setNext(false);
     return (
-      <div>
-        <h2> Thanks!!      </h2>
+      <div><NamedLink
+        name="ConsultantsPage"
+        to={{
+          search:
+            'service=' + selectedService,
+        }}
+        className={css.heroButton}
+      >
+        <FormattedMessage id="Survey.sendButton" />
+      </NamedLink>
       </div>
     );
   }
   const BabyIsBorn = () => {
-    setNext(false);
     return (
       <TypeAge />
     );
   }
 
   const AgeHigherThanTwoMonths = () => {
-    setNext(false);
     return (
       <div>
         <p> Age Higher 2 months</p>
-        <ChooseBetweenServices props={['Breastfeeding', 'Sleep Coaching', 'Mental Health', 'Physical Therapy']} />
+        <ChooseBetweenServices props={{ services: ['Breastfeeding', 'Sleep Coaching', 'Mental Health', 'Physical Therapy'] }} />
       </div>
     )
   }
   const AgeLessThanTwoMonths = () => {
-    setNext(false);
     return (
       <div>
         <p> Age Higher 2 months</p>
-        <ChooseBetweenServices props={['Pregnancy & Postpartum', 'Sleep Coaching', 'Mental Health',
-          'Physical Therapy']} />
+        <ChooseBetweenServices props={{
+          services: ['Pregnancy & Postpartum', 'Sleep Coaching', 'Mental Health',
+            'Physical Therapy']
+        }} />
       </div>
     )
   }
 
   const TypeAge = () => {
-    setNext(false);
     return (
       <div>
         <p> Type Age: </p>
-        <input value='number' onChange={e => setAge(e.target.value)} />
+        <input type='number' value={age} onChange={e => { setNext(undefined); setAge(parseInt(e.target.value)) }} />
       </div>
     );
   }
 
   const TypeReaniningMonths = () => {
-    setNext(false);
     return (
       <div>
         <p> Type Reanining Months: </p>
-        <input value='number' onChange={e => setReaniningMonths(e.target.value)} />
+        <input type='number' value={reaniningMonths} onChange={e => { setNext(undefined); setReaniningMonths(parseInt(e.target.value)) }} />
       </div>
     );
   }
 
   const BabyNotBorn = () => {
-    setNext(false);
     return (
       <TypeReaniningMonths />
     );
   }
-  const ChooseBetweenServices = (services) => {
-    setNext(false);
+  const ChooseBetweenServices = (props) => {
+    const { services } = props.props;
     return (
-      services.map(x => <p>x</p>)
+      <ul>
+        {services.map((value, index) => <li> <input id='service' name='service' type='radio' value={value} checked={tmp !== undefined || index==0} onChange={e => { setTmp(e.currentTarget.value); }} /><span>{value}</span></li>)}
+      </ul>
     );
+  }
+  const beginQuiz = () => {
+    return result === undefined;
+  }
+  const endQuiz = () => {
+    return next && selectedService !== undefined;
   }
   // prettier-ignore
   return (
@@ -118,31 +124,27 @@ const SurveyPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>Sample Survey</h1>
+          <h1 className={css.pageTitle}>Quick Survey </h1>
 
           <div className={css.contentWrapper}>
             <div className={css.contentMain}>
-            {result === undefined && <Quiz />}
-            {next && result === false && <BabyNotBorn />}
-            {next && result === false && reaniningMonths !== undefined &&
-              <ChooseBetweenServices props={['Pregnancy & Postpartum', 'Sleep Coaching', 'Mental Health',
-                'Physical Therapy']} />}
-            {next && result === true && <BabyIsBorn />}
-            {next && result === true && age > 2 && <AgeHigherThanTwoMonths />}
-            {next && result === true && age < 2 && <AgeLessThanTwoMonths />}
-            {next && selectedService !== undefined && <EndQuiz />}
-            <button onClick={setNext(true)}>Next</button>
+            <h2 className={css.subtitle}>Please answer the questions to determine the recommanded services.</h2>
 
-              <NamedLink
-                name="SurveyPage"
-                to={{
-                  search:
-                    'service=PREGNANCY & POSTPARTUM',
-                }}
-                className={css.heroButton}
-              >
-                <FormattedMessage id="Survey.sendButton" />
-              </NamedLink>
+              {beginQuiz() && <Quiz />}
+              {selectedService === undefined && next === undefined && result === false && <BabyNotBorn />}
+              {selectedService === undefined && next && result === false && reaniningMonths !== undefined &&
+                <ChooseBetweenServices props={{
+                  services: ['Pregnancy & Postpartum', 'Sleep Coaching', 'Mental Health',
+                    'Physical Therapy']
+                }} />}
+              {selectedService === undefined && next === undefined && result === true && <BabyIsBorn />}
+              {selectedService === undefined && next && result === true && age > 2 && <AgeHigherThanTwoMonths />}
+              {selectedService === undefined && next && result === true && age <= 2 && <AgeLessThanTwoMonths />}
+              {endQuiz() && <EndQuiz />}
+              {/* {result !== undefined && <button onClick={() => setNext(undefined)}>Back</button>} */}
+              {result !== undefined && selectedService === undefined && <button onClick={() => {setNext(true); setSelectedService(tmp)}}>Next</button>}
+              {result === undefined && <button className='btn btn-primary' onClick={() => setResult(true)}>Yes</button>}
+              {result === undefined && <button className='btn btn-primary' onClick={() => setResult(false)}>No</button>}
             </div>
           </div>
         </LayoutWrapperMain>

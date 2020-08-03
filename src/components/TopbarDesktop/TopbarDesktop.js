@@ -19,6 +19,7 @@ import {
 import { TopbarSearchForm } from '../../forms';
 
 import css from './TopbarDesktop.css';
+import ConsultantLink from '../ConsultantLink';
 
 const TopbarDesktop = props => {
   const {
@@ -171,6 +172,18 @@ const TopbarDesktop = props => {
         }
       />
     ) : null;
+    const consultantWizardLink =
+      authenticatedOnClientSide && currentUserListingFetched && currentUserListing ? (
+        <ConsultantLink
+          className={css.createListingLink}
+          listing={currentUserListing}
+          children={
+            <span className={css.createListing}>
+              <FormattedMessage id="TopbarDesktop.viewListing" />
+            </span>
+          }
+        />
+      ) : null;
 
     const createListingLink =
     isAuthenticatedOrJustHydrated && !(currentUserListingFetched && !currentUserListing) ? null : (
@@ -199,7 +212,7 @@ const TopbarDesktop = props => {
         />
       </NamedLink>
       {search}
-      {listingLink}
+      {consultantWizardLink}
       {/* {createListingLink} */}
       {/* {createConsultingLink} */}
       {!window.location.href.includes("/consultant") && !window.location.href.includes("/mom") && momLink}

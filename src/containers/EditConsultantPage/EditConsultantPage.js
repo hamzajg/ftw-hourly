@@ -21,8 +21,8 @@ import {
   stripeAccountClearError,
   getStripeConnectAccountLink,
 } from '../../ducks/stripeConnectAccount.duck';
-import { EditConsultingWizard, Footer, NamedRedirect, Page, UserNav } from '../../components';
-import { TopbarContainer } from '../../containers';
+import { EditConsultantWizard, Footer, NamedRedirect, Page, UserNav } from '../../components';
+import { TopbarContainer } from '..';
 
 import {
   requestAddAvailabilityException,
@@ -36,9 +36,9 @@ import {
   loadData,
   clearUpdatedTab,
   savePayoutDetails,
-} from './EditConsultingPage.duck';
+} from './EditConsultantPage.duck';
 
-import css from './EditConsultingPage.css';
+import css from './EditConsultantPage.css';
 
 const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
 const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure';
@@ -50,7 +50,7 @@ const STRIPE_ONBOARDING_RETURN_URL_TYPES = [
 const { UUID } = sdkTypes;
 
 // N.B. All the presentational content needs to be extracted to their own components
-export const EditConsultingPageComponent = props => {
+export const EditConsultantPageComponent = props => {
   const {
     currentUser,
     currentUserListing,
@@ -111,7 +111,7 @@ export const EditConsultingPageComponent = props => {
 
     const redirectProps = isPendingApproval
       ? {
-          name: 'ConsultingPageVariant',
+          name: 'ConsultantPageVariant',
           params: {
             id: listingId.uuid,
             slug: listingSlug,
@@ -119,7 +119,7 @@ export const EditConsultingPageComponent = props => {
           },
         }
       : {
-          name: 'ConsultingPage',
+          name: 'ConsultantPage',
           params: {
             id: listingId.uuid,
             slug: listingSlug,
@@ -131,7 +131,7 @@ export const EditConsultingPageComponent = props => {
     // If we allow only one listing per provider, we need to redirect to correct listing.
     return (
       <NamedRedirect
-        name="EditConsultingPage"
+        name="EditConsultantPage"
         params={{
           id: currentUserListing.id.uuid,
           slug: createSlug(currentUserListing.attributes.title),
@@ -184,8 +184,8 @@ export const EditConsultingPageComponent = props => {
     });
 
     const title = isNewListingFlow
-      ? intl.formatMessage({ id: 'EditConsultingPage.titleCreateListing' })
-      : intl.formatMessage({ id: 'EditConsultingPage.titleEditListing' });
+      ? intl.formatMessage({ id: 'EditConsultantPage.titleCreateListing' })
+      : intl.formatMessage({ id: 'EditConsultantPage.titleEditListing' });
 
     return (
       <Page title={title} scrollingDisabled={scrollingDisabled}>
@@ -196,10 +196,10 @@ export const EditConsultingPageComponent = props => {
           mobileClassName={css.mobileTopbar}
         />
         <UserNav
-          selectedPageName={listing ? 'EditConsultingPage' : 'NewConsultingPage'}
+          selectedPageName={listing ? 'EditConsultantPage' : 'NewConsultantPage'}
           listing={listing}
         />
-        <EditConsultingWizard
+        <EditConsultantWizard
           id="EditConsultingWizard"
           className={css.wizard}
           params={params}
@@ -246,7 +246,7 @@ export const EditConsultingPageComponent = props => {
     // If user has come to this page through a direct linkto edit existing listing,
     // we need to load it first.
     const loadingPageMsg = {
-      id: 'EditConsultingPage.loadingListingData',
+      id: 'EditConsultantPage.loadingListingData',
     };
     return (
       <Page title={intl.formatMessage(loadingPageMsg)} scrollingDisabled={scrollingDisabled}>
@@ -257,7 +257,7 @@ export const EditConsultingPageComponent = props => {
           mobileClassName={css.mobileTopbar}
         />
         <UserNav
-          selectedPageName={listing ? 'EditConsultingPage' : 'NewConsultingPage'}
+          selectedPageName={listing ? 'EditConsultantPage' : 'NewConsultantPage'}
           listing={listing}
         />
         <div className={css.placeholderWhileLoading} />
@@ -267,7 +267,7 @@ export const EditConsultingPageComponent = props => {
   }
 };
 
-EditConsultingPageComponent.defaultProps = {
+EditConsultantPageComponent.defaultProps = {
   createStripeAccountError: null,
   fetchStripeAccountError: null,
   getAccountLinkError: null,
@@ -284,7 +284,7 @@ EditConsultingPageComponent.defaultProps = {
   currentUserListingFetched: false,
 };
 
-EditConsultingPageComponent.propTypes = {
+EditConsultantPageComponent.propTypes = {
   createStripeAccountError: propTypes.error,
   fetchStripeAccountError: propTypes.error,
   getAccountLinkError: propTypes.error,
@@ -393,14 +393,14 @@ const mapDispatchToProps = dispatch => ({
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-const EditConsultingPage = compose(
+const EditConsultantPage = compose(
   withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(injectIntl(EditConsultingPageComponent));
+)(injectIntl(EditConsultantPageComponent));
 
-EditConsultingPage.loadData = loadData;
+EditConsultantPage.loadData = loadData;
 
-export default EditConsultingPage;
+export default EditConsultantPage;
