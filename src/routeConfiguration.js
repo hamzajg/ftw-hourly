@@ -178,14 +178,14 @@ const routeConfiguration = () => {
       component: props => <CheckoutPage {...props} />,
       setInitialValues: CheckoutPage.setInitialValues,
     },
-    // {
-    //   path: '/l/:slug/:id/:variant',
-    //   name: 'ListingPageVariant',
-    //   auth: true,
-    //   authPage: 'LoginPage',
-    //   component: props => <ListingPage {...props} />,
-    //   loadData: ListingPage.loadData,
-    // },
+    {
+      path: '/l/:slug/:id/:variant',
+      name: 'ListingPageVariant',
+      auth: true,
+      authPage: 'LoginPage',
+      component: props => <ListingPage {...props} />,
+      loadData: ListingPage.loadData,
+    },
     {
       path: '/c/:slug/:id/:type/:tab/:returnURLType',
       name: 'EditConsultingStripeOnboardingPage',
