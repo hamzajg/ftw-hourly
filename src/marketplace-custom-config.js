@@ -117,6 +117,30 @@ export const filters = [
     },
   },
   {
+    id: 'services',
+    label: 'Services',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_yogaStyles'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'pregnancy_postpartum', label: 'Pregnancy & Postpartum' },
+        { key: 'breastfeeding', label: 'Breastfeeding' },
+        { key: 'sleep_coaching', label: 'Sleep Coaching' },
+        { key: 'mental_health', label: 'Mental Health' },
+        { key: 'physical_therapy', label: 'Physical Therapy' },
+      ],
+    },
+  },
+  {
     id: 'certificate',
     label: 'Certificate',
     type: 'SelectSingleFilter',

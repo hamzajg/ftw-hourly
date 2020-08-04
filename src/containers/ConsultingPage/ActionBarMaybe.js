@@ -11,7 +11,7 @@ import {
 import { NamedLink } from '../../components';
 import EditIcon from './EditIcon';
 
-import css from './ListingPage.css';
+import css from './ConsultingPage.css';
 
 export const ActionBarMaybe = props => {
   const { isOwnListing, listing, editParams } = props;
@@ -31,7 +31,7 @@ export const ActionBarMaybe = props => {
       ownListingTextTranslationId = 'ListingPage.ownListingDraft';
     }
 
-    const message = isDraft ? 'ConsultingPage.finishListing' : 'ConsultingPage.editListing';
+    const message = isDraft ? 'ListingPage.finishListing' : 'ListingPage.editListing';
 
     const ownListingTextClasses = classNames(css.ownListingText, {
       [css.ownListingTextPendingApproval]: isPendingApproval,

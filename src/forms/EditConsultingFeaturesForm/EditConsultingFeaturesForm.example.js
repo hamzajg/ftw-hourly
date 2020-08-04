@@ -15,12 +15,11 @@ const filterConfig = [
     config: {
       mode: 'has_all',
       options: [
-        { key: 'ashtanga', label: 'Ashtanga' },
-        { key: 'hatha', label: 'Hatha' },
-        { key: 'kundalini', label: 'Kundalini' },
-        { key: 'restorative', label: 'Restorative' },
-        { key: 'vinyasa', label: 'Vinyasa' },
-        { key: 'yin', label: 'Yin' },
+        { key: 'pregnancy_postpartum', label: 'Pregnancy & Postpartum' },
+        { key: 'breastfeeding', label: 'Breastfeeding' },
+        { key: 'sleep_coaching', label: 'Sleep Coaching' },
+        { key: 'mental_health', label: 'Mental Health' },
+        { key: 'physical_therapy', label: 'Physical Therapy' },
       ],
     },
   },

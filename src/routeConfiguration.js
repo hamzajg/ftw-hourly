@@ -25,14 +25,14 @@ import {
   HomeLandingPage,
   ServicesPage,
   VideoPage,
-  EditConsultingPage,
+  EditConsultantPage,
   MomPage,
   ProblemsPage,
   SurveyPage,
   CategoriesPage,
   ConsultantsPage,
   ConsultantPage,
-  NewConsultantPage,
+  ConsultingPage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -111,21 +111,21 @@ const routeConfiguration = () => {
     },
     {
       path: '/c/new',
-      name: 'NewConsultingPage',
+      name: 'NewConsultantPage',
       auth: true,
       component: () => (
         <NamedRedirect
-          name="EditConsultingPage"
+          name="EditConsultantPage"
           params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description' }}
         />
       ),
     },
     {
       path: '/c/:slug/:id/:type/:tab',
-      name: 'EditConsultingPage',
+      name: 'EditConsultantPage',
       auth: true,
-      component: props => <EditConsultingPage {...props} allowOnlyOneListing />,
-      loadData: EditConsultingPage.loadData,
+      component: props => <EditConsultantPage {...props} allowOnlyOneListing />,
+      loadData: EditConsultantPage.loadData,
     },
     {
       path: '/',
@@ -192,15 +192,15 @@ const routeConfiguration = () => {
       name: 'ConsultantPageVariant',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <NewConsultantPage {...props} />,
-      loadData: NewConsultantPage.loadData,
+      component: props => <ListingPage {...props} />,
+      loadData: ConsultingPage.loadData,
     },
     {
       path: '/c/:slug/:id/:type/:tab/:returnURLType',
       name: 'EditConsultingStripeOnboardingPage',
       auth: true,
-      component: props => <EditConsultingPage {...props} />,
-      loadData: EditConsultingPage.loadData,
+      component: props => <EditConsultantPage {...props} />,
+      loadData: EditConsultantPage.loadData,
     },
     {
       path: '/l/new',
