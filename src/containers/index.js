@@ -35,4 +35,4 @@ export { default as ServicesPage } from './ServicesPage/';
 export { default as VideoPage } from './VideoPage/';
 export { default as ConsultingPage } from './ConsultingPage';
 export { default as NewConsultantPage } from './NewConsultantPage';
-export { default as EditConsultingPage } from './EditConsultantPage';
+export { default as EditConsultantPage } from './EditConsultantPage';

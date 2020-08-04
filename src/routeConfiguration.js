@@ -25,7 +25,7 @@ import {
   HomeLandingPage,
   ServicesPage,
   VideoPage,
-  EditConsultingPage,
+  EditConsultantPage,
   MomPage,
   ProblemsPage,
   SurveyPage,
@@ -111,21 +111,21 @@ const routeConfiguration = () => {
     },
     {
       path: '/c/new',
-      name: 'NewConsultingPage',
+      name: 'NewConsultantPage',
       auth: true,
       component: () => (
         <NamedRedirect
-          name="EditConsultingPage"
+          name="EditConsultantPage"
           params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description' }}
         />
       ),
     },
     {
       path: '/c/:slug/:id/:type/:tab',
-      name: 'EditConsultingPage',
+      name: 'EditConsultantPage',
       auth: true,
-      component: props => <EditConsultingPage {...props} allowOnlyOneListing />,
-      loadData: EditConsultingPage.loadData,
+      component: props => <EditConsultantPage {...props} allowOnlyOneListing />,
+      loadData: EditConsultantPage.loadData,
     },
     {
       path: '/',
@@ -199,8 +199,8 @@ const routeConfiguration = () => {
       path: '/c/:slug/:id/:type/:tab/:returnURLType',
       name: 'EditConsultingStripeOnboardingPage',
       auth: true,
-      component: props => <EditConsultingPage {...props} />,
-      loadData: EditConsultingPage.loadData,
+      component: props => <EditConsultantPage {...props} />,
+      loadData: EditConsultantPage.loadData,
     },
     {
       path: '/l/new',

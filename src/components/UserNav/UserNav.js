@@ -14,9 +14,9 @@ const listingTab = (listing, selectedPageName) => {
   if (!listing) {
     return {
       text: <FormattedMessage id="UserNav.newListing" />,
-      selected: selectedPageName === 'NewListingPage',
+      selected: selectedPageName === 'NewConsultantPage',
       linkProps: {
-        name: 'NewListingPage',
+        name: 'NewConsultantPage',
       },
     };
   }
@@ -28,9 +28,9 @@ const listingTab = (listing, selectedPageName) => {
 
   return {
     text: <FormattedMessage id="UserNav.editListing" />,
-    selected: selectedPageName === 'EditListingPage',
+    selected: selectedPageName === 'EditConsultantPage',
     linkProps: {
-      name: 'EditListingPage',
+      name: 'EditConsultantPage',
       params: {
         id,
         slug,

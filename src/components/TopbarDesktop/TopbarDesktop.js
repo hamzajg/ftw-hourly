@@ -144,6 +144,13 @@ const TopbarDesktop = props => {
     </NamedLink>
   );
 
+  const surveyLink = (
+    <NamedLink name="SurveyPage" className={css.signupLink}>
+      <span className={css.signup}>
+        <FormattedMessage id="TopbarDesktop.survey" />
+      </span>
+    </NamedLink>
+  );
   const signupLink = isAuthenticatedOrJustHydrated ? null : (
     <NamedLink name="SignupPage" className={css.signupLink}>
       <span className={css.signup}>
@@ -212,6 +219,7 @@ const TopbarDesktop = props => {
         />
       </NamedLink>
       {search}
+      {window.location.href.includes("/mom") && surveyLink}
       {consultantWizardLink}
       {/* {createListingLink} */}
       {/* {createConsultingLink} */}
